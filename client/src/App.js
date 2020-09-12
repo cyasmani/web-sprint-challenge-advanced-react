@@ -5,11 +5,20 @@ import PlantList from "./components/PlantList";
 import ShoppingCart from "./components/ShoppingCart";
 import CheckoutForm from "./components/CheckoutForm";
 
+import useLightMode from "./hooks/useLightMode"
+
+
 import "./App.css";
+import "./styles/plantlist.css";
 
 function App() {
   // array of plants that have been added to the cart
   const [cart, setCart] = useState([]);
+  const [lightMode, setLightMode] = useLightMode(false)
+  const toggleMode = e => {
+    e.preventDefault();
+    setLightMode(!lightMode);
+  };
 
   // add a plant to the cart
   const addToCart = (plant) => {
@@ -25,6 +34,12 @@ function App() {
     <div>
       <Router>
         <nav className="container">
+          <div className="light-mode__toggle">
+            <div
+              onClick={toggleMode}
+              className={lightMode ? 'toggle toggled' : 'toggle'}
+            />
+          </div>
           <h1>
             React Plants <span role="img">🌿</span>
           </h1>
